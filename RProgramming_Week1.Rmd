@@ -1,0 +1,102 @@
+---
+title: "RProgramming_Week1"
+author: "Luis Ivan"
+date: "11/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Week 1 - R objects and attributes
+
+5 basic types of objects:  
+-  Character  
+-  Numeric  
+-  Integer  
+-  Complex  
+-  Boolean  
+
+Special numbers: **Inf** (Infinite) , **NaN** (Not a Number)
+
+Objects have attributes
+
+# Week 1 - Vectors and lists
+
+Different ways of creating vectors of objects:
+
+```{r cars}
+x <- c(0.5, 0.6)
+x <- c(TRUE, FALSE)
+x <- c(T, F)
+x <- c("a", "b", "c")
+x <- 9:29
+x <- c(1+0i, 2+4i)
+
+x <- vector("numeric", length = 10)
+```
+
+**Coercion** is similar to casting. Vectors of integer and character will coerce to character.
+
+**Explicit coercion** happens with as.* functions.
+```{r coercion}
+x<- 0:6
+class(x)
+as.numeric(x)
+as.logical(x)
+as.character(x)
+```
+
+##Lists
+
+*Lists* are vectors with elements of different classes. ~~Similar to structs in C~~.
+They have double brackets, so they are identifiable that way.
+Vectors have single bracket.
+
+```{r lists}
+x<-list(1, "a", TRUE, 1+4i)
+x
+```
+
+# Matrices
+
+```{r matrices}
+m <- matrix(nrow = 2, ncol = 3)
+m
+attributes(m)
+```
+
+Constructed column-wise. Upper left running down the columns.
+Can be constructed also from a vector.
+
+```{r from vector}
+m <- 1:10
+m
+dim(m) <- c(2,5)
+m
+```
+
+Can be created by binding two variables with cbind(var1, var2) or rbind(x, y). *Rowbind or columnbind*
+
+# Factors
+
+Special type of vector for categorical data.  
+-  Integer vector where each integer has a label.  
+-  Treated by modelling functions like lm() and glm().  
+-  Something like enums in C.
+
+```{r factors}
+x <- factor(c("yes", "yes", "no", "yes", "no"))
+x
+table(x)
+unclass(x)
+```
+
+Order of levels can be set by using argument factor(). Default is alphabetical order
+
+```{r order factors}
+x <- factor(c("yes", "yes", "no", "yes", "no"),
+            levels = c("yes", "no"))
+x
+```
