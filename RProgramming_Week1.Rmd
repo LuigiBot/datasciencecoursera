@@ -100,3 +100,12 @@ x <- factor(c("yes", "yes", "no", "yes", "no"),
             levels = c("yes", "no"))
 x
 ```
+
+# Missing values
+
+Verified by is.na() or is.nan()
+NaN value is also NA, but not the other way around.
+NA is a numeric missing value, NaN is not a number.
+
+# Data Frames
+
