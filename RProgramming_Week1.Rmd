@@ -179,3 +179,7 @@ good
 x[good]
 y[good]
 ```
+
+# Useful functions
+
+seq, rep, setwd(), getwd(), seq_along, 
