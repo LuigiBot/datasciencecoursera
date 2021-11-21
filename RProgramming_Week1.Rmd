@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Week 1 - R objects and attributes
+# Week 1 - R objects and attributes - DataTypes
 
 5 basic types of objects:  
 -  Character  
@@ -22,7 +22,7 @@ Special numbers: **Inf** (Infinite) , **NaN** (Not a Number)
 
 Objects have attributes
 
-# Week 1 - Vectors and lists
+## Vectors and lists
 
 Different ways of creating vectors of objects:
 
@@ -59,7 +59,7 @@ x<-list(1, "a", TRUE, 1+4i)
 x
 ```
 
-# Matrices
+## Matrices
 
 ```{r matrices}
 m <- matrix(nrow = 2, ncol = 3)
@@ -79,7 +79,7 @@ m
 
 Can be created by binding two variables with cbind(var1, var2) or rbind(x, y). *Rowbind or columnbind*
 
-# Factors
+## Factors
 
 Special type of vector for categorical data.  
 -  Integer vector where each integer has a label.  
@@ -101,11 +101,81 @@ x <- factor(c("yes", "yes", "no", "yes", "no"),
 x
 ```
 
-# Missing values
+## Missing values
 
 Verified by is.na() or is.nan()
 NaN value is also NA, but not the other way around.
 NA is a numeric missing value, NaN is not a number.
 
-# Data Frames
+## Data Frames
 
+Tabular data, tables. Every element = same length. Column can be different types.
+
+Read by read.table() or read.csv().
+data.matrix to convert to matrix
+
+```{r data frames}
+x <- data.frame(foo = 1:4, bar = c(T, T, F, F), temp = c("Lu", "Da", "Mi", "No"))
+x
+nrow(x)
+ncol(x)
+```
+
+## Names attributes
+
+Can add names to describe objects to lists, frames, matrices
+
+```{r names}
+x <- data.frame(foo = 1:4, bar = c(T, T, F, F), temp = c("Lu", "Da", "Mi", "No"))
+y <- list(a = 1, b = 2, c = 3)
+names(x) <- c("foo", "bar", "nor")
+x
+y
+```
+
+# Reading Data
+
+read.table Arguments:  
+-  File: name of file  
+-  Header: if the file has header file  
+-  Sep: how columns are separated. Default is *space*.  
+-  colClasses: class of each column  
+-  nrows: number of rows  
+-  comment.char: how it's a comment  
+-  skip: number of lines from beginning  
+-  stringsAsFactors: should char coded as factors?  
+
+*Read the help page for read.table()*
+Memory (MB) is Rows*Columns*SizeOfData / (2to20).
+
+# Textual formats
+
+dumping and dputing - textual format is editable.
+Read about dump and dput/dget. The important stuff is that it saves an .R file with the value and metadata of programs.
+
+# Interfaces to outside world
+
+file - normal file **(r - readonly / w - writing)**
+gzfile - gzip file
+bzfile - bzip2
+url - webpage
+
+# Subsetting R Objects
+
+[ returns an object of the same class
+[[ extracts elements of lists or data frames.
+$ obtains elements by name.
+
+```{r na values}
+x <- c(1, 2, NA, 4, NA, 6)
+bad <- is.na()
+x[!bad]
+
+x <- c(1, 2, NA, 4, NA, 6)
+y <- c("a",  "b", NA, "d", NA, NA)
+
+good <- complete.cases(x,y)
+good
+x[good]
+y[good]
+```

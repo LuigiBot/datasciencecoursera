@@ -172,8 +172,8 @@ pre code {
 </div>
 
 
-<div id="week-1---r-objects-and-attributes" class="section level1">
-<h1>Week 1 - R objects and attributes</h1>
+<div id="week-1---r-objects-and-attributes---datatypes" class="section level1">
+<h1>Week 1 - R objects and attributes - DataTypes</h1>
 <p>5 basic types of objects:<br />
 - Character<br />
 - Numeric<br />
@@ -182,9 +182,8 @@ pre code {
 - Boolean</p>
 <p>Special numbers: <strong>Inf</strong> (Infinite) , <strong>NaN</strong> (Not a Number)</p>
 <p>Objects have attributes</p>
-</div>
-<div id="week-1---vectors-and-lists" class="section level1">
-<h1>Week 1 - Vectors and lists</h1>
+<div id="vectors-and-lists" class="section level2">
+<h2>Vectors and lists</h2>
 <p>Different ways of creating vectors of objects:</p>
 <pre class="r"><code>x &lt;- c(0.5, 0.6)
 x &lt;- c(TRUE, FALSE)
@@ -221,8 +220,8 @@ x</code></pre>
 ## [[4]]
 ## [1] 1+4i</code></pre>
 </div>
-<div id="matrices" class="section level1">
-<h1>Matrices</h1>
+<div id="matrices" class="section level2">
+<h2>Matrices</h2>
 <pre class="r"><code>m &lt;- matrix(nrow = 2, ncol = 3)
 m</code></pre>
 <pre><code>##      [,1] [,2] [,3]
@@ -242,8 +241,8 @@ m</code></pre>
 ## [2,]    2    4    6    8   10</code></pre>
 <p>Can be created by binding two variables with cbind(var1, var2) or rbind(x, y). <em>Rowbind or columnbind</em></p>
 </div>
-<div id="factors" class="section level1">
-<h1>Factors</h1>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
 <p>Special type of vector for categorical data.<br />
 - Integer vector where each integer has a label.<br />
 - Treated by modelling functions like lm() and glm().<br />
@@ -266,6 +265,88 @@ x</code></pre>
 x</code></pre>
 <pre><code>## [1] yes yes no  yes no 
 ## Levels: yes no</code></pre>
+</div>
+<div id="missing-values" class="section level2">
+<h2>Missing values</h2>
+<p>Verified by is.na() or is.nan() NaN value is also NA, but not the other way around. NA is a numeric missing value, NaN is not a number.</p>
+</div>
+<div id="data-frames" class="section level2">
+<h2>Data Frames</h2>
+<p>Tabular data, tables. Every element = same length. Column can be different types.</p>
+<p>Read by read.table() or read.csv(). data.matrix to convert to matrix</p>
+<pre class="r"><code>x &lt;- data.frame(foo = 1:4, bar = c(T, T, F, F), temp = c(&quot;Lu&quot;, &quot;Da&quot;, &quot;Mi&quot;, &quot;No&quot;))
+x</code></pre>
+<pre><code>##   foo   bar temp
+## 1   1  TRUE   Lu
+## 2   2  TRUE   Da
+## 3   3 FALSE   Mi
+## 4   4 FALSE   No</code></pre>
+<pre class="r"><code>nrow(x)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>ncol(x)</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="names-attributes" class="section level2">
+<h2>Names attributes</h2>
+<p>Can add names to describe objects to lists, frames, matrices</p>
+<pre class="r"><code>x &lt;- data.frame(foo = 1:4, bar = c(T, T, F, F), temp = c(&quot;Lu&quot;, &quot;Da&quot;, &quot;Mi&quot;, &quot;No&quot;))
+y &lt;- list(a = 1, b = 2, c = 3)
+names(x) &lt;- c(&quot;foo&quot;, &quot;bar&quot;, &quot;nor&quot;)
+x</code></pre>
+<pre><code>##   foo   bar nor
+## 1   1  TRUE  Lu
+## 2   2  TRUE  Da
+## 3   3 FALSE  Mi
+## 4   4 FALSE  No</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>## $a
+## [1] 1
+## 
+## $b
+## [1] 2
+## 
+## $c
+## [1] 3</code></pre>
+</div>
+</div>
+<div id="reading-data" class="section level1">
+<h1>Reading Data</h1>
+<p>read.table Arguments:<br />
+- File: name of file<br />
+- Header: if the file has header file<br />
+- Sep: how columns are separated. Default is <em>space</em>.<br />
+- colClasses: class of each column<br />
+- nrows: number of rows<br />
+- comment.char: how it’s a comment<br />
+- skip: number of lines from beginning<br />
+- stringsAsFactors: should char coded as factors?</p>
+<p><em>Read the help page for read.table()</em> Memory (MB) is Rows<em>Columns</em>SizeOfData / (2to20).</p>
+</div>
+<div id="textual-formats" class="section level1">
+<h1>Textual formats</h1>
+<p>dumping and dputing - textual format is editable. Read about dump and dput/dget. The important stuff is that it saves an .R file with the value and metadata of programs.</p>
+</div>
+<div id="interfaces-to-outside-world" class="section level1">
+<h1>Interfaces to outside world</h1>
+<p>file - normal file <strong>(r - readonly / w - writing)</strong> gzfile - gzip file bzfile - bzip2 url - webpage</p>
+</div>
+<div id="subsetting-r-objects" class="section level1">
+<h1>Subsetting R Objects</h1>
+<p>[ returns an object of the same class [[ extracts elements of lists or data frames. $ obtains elements by name.</p>
+<pre class="r"><code>x &lt;- c(1, 2, NA, 4, NA, 6)
+bad &lt;- is.na(x)
+x[!bad]</code></pre>
+<pre><code>## [1] 1 2 4 6</code></pre>
+<pre class="r"><code>x &lt;- c(1, 2, NA, 4, NA, 6)
+y &lt;- c(&quot;a&quot;,  &quot;b&quot;, NA, &quot;d&quot;, NA, NA)
+
+good &lt;- complete.cases(x,y)
+good</code></pre>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>x[good]</code></pre>
+<pre><code>## [1] 1 2 4</code></pre>
+<pre class="r"><code>y[good]</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;d&quot;</code></pre>
 </div>
 
 
