@@ -1,0 +1,77 @@
+---
+title: "RProgramming_Week2"
+author: "Luis Ivan"
+date: "11/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Control Structures in R
+
+- if, else  
+- for  
+- while: Execute a loop **while** a condition is true  
+- repeat: execute an infinite loop  
+- break: break execution of loop  
+- next: skip iteration of loop
+
+### if - else if - else
+
+You can write the if directly in the declaration, or normally like in C.
+y <- if(x > 3) {
+	10
+ }
+else
+{
+0
+}
+
+### for loop
+
+for(i in 1:10)
+{
+<condition>
+}
+
+for(i in seq_along(x)){ } //loops for length of vector but i is integer
+
+for(letter in x){ } //loops for length of vector but letter is char
+
+### while loop
+
+Same as in C, can be stuck in infinite loops since there's no hardcoded exit condition
+
+### Repeat / break
+
+repeat initiates an infinite loop, stops with a *break*. Not recommendable since it's an
+infinite loop just like the while.
+
+### next
+
+Skips an iteration on a for loop / while loop / ...
+
+# Functions
+
+User of R -> Programmer of R
+Functions are R objects of Class function. Can be passed as arguments, and can be nested.
+Named arguments where potentially they have default values.
+Arguments can be called *positionally* or *by name*.
+
+**If arguments are matched by name, they are taken out of the list. The unnamed ones
+are matched in the order they are listed (excluding the previously named)**
+
+Arguments are only evaluated as needed. -> Lazy evaluation
+```{r lazy evaluation}
+f <- function(a,b){
+  print(a)
+  print(b)
+}
+f(54)
+```
+
+'...' argument is used to pass many undefined arguments (not want to copy full
+set of arguments). Also necessary when number of arguments passed to function
+cannot be known in advance. Cannot be matched positionally neither anything after.
