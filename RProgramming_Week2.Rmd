@@ -67,7 +67,6 @@ Arguments are only evaluated as needed. -> Lazy evaluation
 ```{r lazy evaluation}
 f <- function(a,b){
   print(a)
-  print(b)
 }
 f(54)
 ```
@@ -75,3 +74,44 @@ f(54)
 '...' argument is used to pass many undefined arguments (not want to copy full
 set of arguments). Also necessary when number of arguments passed to function
 cannot be known in advance. Cannot be matched positionally neither anything after.
+
+# Binding
+
+When R binds a value to a symbol, it searches first in the global environment for a
+symbol matching the requested one. If not, it looks in packages in search list. 
+The order is in the following command:
+
+```{r search}
+search()
+```
+
+When loading a new library, it gets put in position 2 in the search list by default.
+R has separate namespaces for functions and non-functions. (can create a var and a func with same name).
+
+### Scoping rules
+
+Determine how a value is associated with a free variable in a function. Uses static scoping, instead of dynamic scoping.
+Lexical scoping (or static) eases statistical operations.
+Lexical scoping means that free variables are searched in the environment in which the function was defined.  
+-  If the variables are not in the environment, they are looked for in the parent environment.  
+- If it's not in the top-level environment, it looks in the next element in the search list, until we hit the **empty environment**. Then, error.
+
+We can have functions in another function!! 
+
+```{r lexical scoping}
+make.power <- function(n){
+  pow <- function(x){
+    x^n
+  }
+  pow
+}
+
+cube <- make.power(3) #Cube is pow with x^3
+square <- make.power(2) #Is pow with x^2
+cube(3)
+square(3)
+```
+
+Seems kind of like a virtual function in C++.
+
+Due to this scoping, all objects are stored in memory. All functions carry a pointer to the defining environment.

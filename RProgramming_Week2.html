@@ -213,6 +213,45 @@ pre code {
 <div id="functions" class="section level1">
 <h1>Functions</h1>
 <p>User of R -&gt; Programmer of R Functions are R objects of Class function. Can be passed as arguments, and can be nested. Named arguments where potentially they have default values. Arguments can be called <em>positionally</em> or <em>by name</em>.</p>
+<p><strong>If arguments are matched by name, they are taken out of the list. The unnamed ones are matched in the order they are listed (excluding the previously named)</strong></p>
+<p>Arguments are only evaluated as needed. -&gt; Lazy evaluation</p>
+<pre class="r"><code>f &lt;- function(a,b){
+  print(a)
+}
+f(54)</code></pre>
+<pre><code>## [1] 54</code></pre>
+<p>‘…’ argument is used to pass many undefined arguments (not want to copy full set of arguments). Also necessary when number of arguments passed to function cannot be known in advance. Cannot be matched positionally neither anything after.</p>
+</div>
+<div id="binding" class="section level1">
+<h1>Binding</h1>
+<p>When R binds a value to a symbol, it searches first in the global environment for a symbol matching the requested one. If not, it looks in packages in search list. The order is in the following command:</p>
+<pre class="r"><code>search()</code></pre>
+<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
+## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<p>When loading a new library, it gets put in position 2 in the search list by default. R has separate namespaces for functions and non-functions. (can create a var and a func with same name).</p>
+<div id="scoping-rules" class="section level3">
+<h3>Scoping rules</h3>
+<p>Determine how a value is associated with a free variable in a function. Uses static scoping, instead of dynamic scoping. Lexical scoping (or static) eases statistical operations. Lexical scoping means that free variables are searched in the environment in which the function was defined.<br />
+- If the variables are not in the environment, they are looked for in the parent environment.<br />
+- If it’s not in the top-level environment, it looks in the next element in the search list, until we hit the <strong>empty environment</strong>. Then, error.</p>
+<p>We can have functions in another function!!</p>
+<pre class="r"><code>make.power &lt;- function(n){
+  pow &lt;- function(x){
+    x^n
+  }
+  pow
+}
+
+cube &lt;- make.power(3) #Cube is pow with x^3
+square &lt;- make.power(2) #Is pow with x^2
+cube(3)</code></pre>
+<pre><code>## [1] 27</code></pre>
+<pre class="r"><code>square(3)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<p>Seems kind of like a virtual function in C++.</p>
+<p>Due to this scoping, all objects are stored in memory. All functions carry a pointer to the defining environment.</p>
+</div>
 </div>
 
 
