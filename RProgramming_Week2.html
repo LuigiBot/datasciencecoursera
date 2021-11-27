@@ -252,6 +252,46 @@ cube(3)</code></pre>
 <p>Seems kind of like a virtual function in C++.</p>
 <p>Due to this scoping, all objects are stored in memory. All functions carry a pointer to the defining environment.</p>
 </div>
+<div id="benefit-of-objective-functions" class="section level3">
+<h3>Benefit of objective functions</h3>
+<p>No need to carry argument lists, since the obj functions can be built which contain all the necessary data for evaluating the function.</p>
+</div>
+</div>
+<div id="coding-standards" class="section level1">
+<h1>Coding Standards</h1>
+<p>The standards are:<br />
+- Indent your code<br />
+- Limit the width of the code (80 columns circa)<br />
+- <strong>Limit the length of the functions (one activity)</strong></p>
+</div>
+<div id="dates-and-times" class="section level1">
+<h1>Dates and Times</h1>
+<p>Special topic. Date represented with Date class. Time represented by POSIXct class. Dates stored as days from 1970-01-01. Times stored as seconds since 1970-01-01.</p>
+<pre class="r"><code>x &lt;- as.Date(&quot;1970-01-01&quot;)
+x</code></pre>
+<pre><code>## [1] &quot;1970-01-01&quot;</code></pre>
+<pre class="r"><code>unclass(x)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<div id="times-in-r" class="section level3">
+<h3>Times in R</h3>
+<ul>
+<li>POSIXct : just a large integer<br />
+</li>
+<li>POSIXlt : Stores info as day of week, month, day of month</li>
+</ul>
+<p>Useful funcs as weekdays, months, quarters.</p>
+<pre class="r"><code>x &lt;- Sys.time()
+typeof(x)</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] &quot;2021-11-27 11:03:09 CST&quot;</code></pre>
+<pre class="r"><code>p&lt;-as.POSIXlt(x)
+names(unclass(p))</code></pre>
+<pre><code>##  [1] &quot;sec&quot;    &quot;min&quot;    &quot;hour&quot;   &quot;mday&quot;   &quot;mon&quot;    &quot;year&quot;   &quot;wday&quot;   &quot;yday&quot;  
+##  [9] &quot;isdst&quot;  &quot;zone&quot;   &quot;gmtoff&quot;</code></pre>
+<pre class="r"><code>p$yday</code></pre>
+<pre><code>## [1] 330</code></pre>
+</div>
 </div>
 
 
