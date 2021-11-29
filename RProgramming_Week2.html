@@ -284,13 +284,16 @@ x</code></pre>
 typeof(x)</code></pre>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <pre class="r"><code>x</code></pre>
-<pre><code>## [1] &quot;2021-11-27 11:03:09 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2021-11-29 16:16:53 CST&quot;</code></pre>
+<pre class="r"><code>unclass(x)</code></pre>
+<pre><code>## [1] 1638224214</code></pre>
 <pre class="r"><code>p&lt;-as.POSIXlt(x)
 names(unclass(p))</code></pre>
 <pre><code>##  [1] &quot;sec&quot;    &quot;min&quot;    &quot;hour&quot;   &quot;mday&quot;   &quot;mon&quot;    &quot;year&quot;   &quot;wday&quot;   &quot;yday&quot;  
 ##  [9] &quot;isdst&quot;  &quot;zone&quot;   &quot;gmtoff&quot;</code></pre>
 <pre class="r"><code>p$yday</code></pre>
-<pre><code>## [1] 330</code></pre>
+<pre><code>## [1] 332</code></pre>
+<p>strptime function passes from <em>text to time!</em> Special classes since you can use as mathematical operators and plot them simply without any trouble.</p>
 </div>
 </div>
 

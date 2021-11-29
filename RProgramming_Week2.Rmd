@@ -153,3 +153,6 @@ p<-as.POSIXlt(x)
 names(unclass(p))
 p$yday
 ```
+
+strptime function passes from *text to time!*
+Special classes since you can use as mathematical operators and plot them simply without any trouble.
