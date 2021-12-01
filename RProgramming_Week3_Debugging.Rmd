@@ -1,0 +1,68 @@
+---
+title: "RProgramming_Week3_Debugging"
+author: "Luis Ivan"
+date: "11/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Debugging with R
+
+Indicators:  
+-  *message*: generic notification, produced by the message function  
+-  *warning*: something is wrong, but not fatal; warning function
+-  *error*: fatal problem occurred, produced by stop function  
+-  *condition*: indicating something unexpected can occur
+
+```{r warning}
+log(-1)
+```
+
+Invisible stops from auto printing (like putting ; in matlab)
+```{r function}
+printmessage <- function(x){
+  if(is.na(x))
+    print("x is a missing value!")
+  else if (x>0)
+    print("x is greater than zero")
+  else
+    print("x is less or equal than zero")
+  invisible(x)
+}
+
+printmessage(5)
+printmessage(-1)
+printmessage(NA) #returns an error without the first if
+```
+
+## Questions to debug a function
+
+- What was the input?  
+- What was expecting? Output?  
+- What did we get?  
+- How does it differ from expectation?  
+- Was the expectation correct?  
+- Is the problem reproducible?    
+
+## Tools of R
+
+- **Traceback**: prints the call stack after an error occurs
+- **Debug**: steps through execution one step at a time  
+- **browser**: suspends a function and puts the system in debug mode  
+- **trace**: insert debugging code into a function in specific places  
+- **recover**: allows to modify error behavior to browse the call stack  
+
+### Traceback
+
+Just call *traceback()* after an error, and you'll get the last functions called. Only gives the most recent error, so needs to be called right away.
+
+### Debug
+
+First call debug(*function*). Then call the function and will print all the code in the function, and open the browser, that's kind of moving your environment to the function. Let's you go line by line and then you know exactly where the function happened.
+
+### Recover
+
+First call options(error = recover). This is a global option. Instead of getting just the console with an error, it gives you the call stack, and then lets you debug one specific part of the call stack.
